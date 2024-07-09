@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AuthenticationServices
+import KakaoSDKAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,9 +18,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: windowScene)
+        
+        let vc = LoginViewController()
+        
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
-
+    
+    // iOS 13+는 사용해 줘야 한다. 카카오톡으로부터 받은 URL인지 확인하고 웹뷰를 여는 형식
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.handleOpenUrl(url: url)
+            }
+        }
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -27,8 +45,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        appleIDProvider.getCredentialState(forUserID: "001642.32b0158cb7444987a6d4398bec219525.0846") { (credentialState, error) in
+            switch credentialState {
+            case .authorized:
+                print("해당 ID는 연동되어있습니다.")
+            case .revoked, .notFound :
+                print("해당 ID는 연동 실패 및 찾을 수 없습니다")
+//                
+//                DispatchQueue.main.async {
+//                    self.window?.rootViewController = LoginViewController()
+//                }
+            default:
+                break
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

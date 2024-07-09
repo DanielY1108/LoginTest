@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65521B272C3D6459000CAB26 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 65521B262C3D6459000CAB26 /* NaverThirdPartyLogin */; };
+		65521B2A2C3D6491000CAB26 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 65521B292C3D6491000CAB26 /* NaverThirdPartyLogin */; };
+		65521B2D2C3D8100000CAB26 /* NaverUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65521B2C2C3D8100000CAB26 /* NaverUserModel.swift */; };
+		65521B2F2C3D8C42000CAB26 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65521B2E2C3D8C42000CAB26 /* Helper.swift */; };
 		6570F2202C32866A002E6224 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F21F2C32866A002E6224 /* AppDelegate.swift */; };
 		6570F2222C32866A002E6224 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F2212C32866A002E6224 /* SceneDelegate.swift */; };
 		6570F2242C32866A002E6224 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F2232C32866A002E6224 /* LoginViewController.swift */; };
@@ -31,9 +35,12 @@
 		6570F25A2C33EA0E002E6224 /* KakaoAuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F2592C33EA0D002E6224 /* KakaoAuthVM.swift */; };
 		6570F25F2C33F1CA002E6224 /* AppleAutoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F25E2C33F1CA002E6224 /* AppleAutoVM.swift */; };
 		6570F2642C37E789002E6224 /* NaverAuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F2632C37E789002E6224 /* NaverAuthVM.swift */; };
+		659123A42C3D4A0100170E79 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 659123A32C3D4A0100170E79 /* NaverThirdPartyLogin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65521B2C2C3D8100000CAB26 /* NaverUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverUserModel.swift; sourceTree = "<group>"; };
+		65521B2E2C3D8C42000CAB26 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		6570F21C2C32866A002E6224 /* Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Login.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6570F21F2C32866A002E6224 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6570F2212C32866A002E6224 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +66,7 @@
 				6570F2482C33DB81002E6224 /* KakaoSDKCommon in Frameworks */,
 				6570F24C2C33DB81002E6224 /* KakaoSDKFriendCore in Frameworks */,
 				6570F2372C3288E8002E6224 /* FlexLayout in Frameworks */,
+				65521B272C3D6459000CAB26 /* NaverThirdPartyLogin in Frameworks */,
 				6570F2462C33DB81002E6224 /* KakaoSDKCertCore in Frameworks */,
 				6570F2502C33DB81002E6224 /* KakaoSDKShare in Frameworks */,
 				6570F2402C33DB81002E6224 /* KakaoSDK in Frameworks */,
@@ -66,8 +74,10 @@
 				6570F24E2C33DB81002E6224 /* KakaoSDKNavi in Frameworks */,
 				6570F2522C33DB81002E6224 /* KakaoSDKTalk in Frameworks */,
 				6570F2562C33DB81002E6224 /* KakaoSDKUser in Frameworks */,
+				65521B2A2C3D6491000CAB26 /* NaverThirdPartyLogin in Frameworks */,
 				6570F2442C33DB81002E6224 /* KakaoSDKCert in Frameworks */,
 				6570F2542C33DB81002E6224 /* KakaoSDKTemplate in Frameworks */,
+				659123A42C3D4A0100170E79 /* NaverThirdPartyLogin in Frameworks */,
 				6570F24A2C33DB81002E6224 /* KakaoSDKFriend in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65521B2B2C3D80E4000CAB26 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65521B2C2C3D8100000CAB26 /* NaverUserModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		6570F2132C32866A002E6224 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +115,7 @@
 				6570F23B2C328919002E6224 /* Login.entitlements */,
 				6570F21F2C32866A002E6224 /* AppDelegate.swift */,
 				6570F2212C32866A002E6224 /* SceneDelegate.swift */,
+				65521B2B2C3D80E4000CAB26 /* Models */,
 				6570F25C2C33EA3C002E6224 /* Views */,
 				6570F25B2C33EA39002E6224 /* ViewModels */,
 				6570F25D2C33EA6A002E6224 /* Helper */,
@@ -131,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				6570F2332C3287AA002E6224 /* Preview+UIViewController.swift */,
+				65521B2E2C3D8C42000CAB26 /* Helper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -166,6 +186,9 @@
 				6570F2512C33DB81002E6224 /* KakaoSDKTalk */,
 				6570F2532C33DB81002E6224 /* KakaoSDKTemplate */,
 				6570F2552C33DB81002E6224 /* KakaoSDKUser */,
+				659123A32C3D4A0100170E79 /* NaverThirdPartyLogin */,
+				65521B262C3D6459000CAB26 /* NaverThirdPartyLogin */,
+				65521B292C3D6491000CAB26 /* NaverThirdPartyLogin */,
 			);
 			productName = Login;
 			productReference = 6570F21C2C32866A002E6224 /* Login.app */;
@@ -199,6 +222,7 @@
 				6570F2352C3288E8002E6224 /* XCRemoteSwiftPackageReference "FlexLayout" */,
 				6570F2382C3288EF002E6224 /* XCRemoteSwiftPackageReference "PinLayout" */,
 				6570F23E2C33DB81002E6224 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				65521B282C3D6491000CAB26 /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */,
 			);
 			productRefGroup = 6570F21D2C32866A002E6224 /* Products */;
 			projectDirPath = "";
@@ -229,10 +253,12 @@
 				6570F2242C32866A002E6224 /* LoginViewController.swift in Sources */,
 				6570F2202C32866A002E6224 /* AppDelegate.swift in Sources */,
 				6570F2342C3287AA002E6224 /* Preview+UIViewController.swift in Sources */,
+				65521B2F2C3D8C42000CAB26 /* Helper.swift in Sources */,
 				6570F2222C32866A002E6224 /* SceneDelegate.swift in Sources */,
 				6570F25A2C33EA0E002E6224 /* KakaoAuthVM.swift in Sources */,
 				6570F2642C37E789002E6224 /* NaverAuthVM.swift in Sources */,
 				6570F23D2C332388002E6224 /* MainViewController.swift in Sources */,
+				65521B2D2C3D8100000CAB26 /* NaverUserModel.swift in Sources */,
 				6570F25F2C33F1CA002E6224 /* AppleAutoVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +480,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		65521B282C3D6491000CAB26 /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/naver/naveridlogin-sdk-ios";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		6570F2352C3288E8002E6224 /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/layoutBox/FlexLayout.git";
@@ -481,6 +515,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		65521B262C3D6459000CAB26 /* NaverThirdPartyLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NaverThirdPartyLogin;
+		};
+		65521B292C3D6491000CAB26 /* NaverThirdPartyLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65521B282C3D6491000CAB26 /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */;
+			productName = NaverThirdPartyLogin;
+		};
 		6570F2362C3288E8002E6224 /* FlexLayout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6570F2352C3288E8002E6224 /* XCRemoteSwiftPackageReference "FlexLayout" */;
@@ -550,6 +593,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6570F23E2C33DB81002E6224 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		659123A32C3D4A0100170E79 /* NaverThirdPartyLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NaverThirdPartyLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,19 +9,42 @@ import UIKit
 import AuthenticationServices
 import KakaoSDKCommon
 import KakaoSDKAuth
+import NaverThirdPartyLogin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let kakaoNativeAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] ?? ""
+        let kakaoNativeAppKey = Helper.getBundelValue("KAKAO_NATIVE_APP_KEY")
         
-        KakaoSDK.initSDK(appKey: kakaoNativeAppKey as! String)
+        KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
+        
+        setupNaverLogin()
 
          return true
+    }
+    
+    func setupNaverLogin() {
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        
+        // 네이버 앱으로 인증하는 방식 활성화(true)
+        instance?.isNaverAppOauthEnable = true
+        // SafariViewContoller에서 인증하는 방식 활성화(true)
+        instance?.isInAppOauthEnable = true
+        // 인증 화면을 iPhone의 세로 모드에서만 활성화(true)
+        instance?.setOnlyPortraitSupportInIphone(true)
+        
+        // 로그인 설정
+        instance?.serviceUrlScheme = Helper.getBundelValue("NAVER_SERVICE_URL_SCHEME")
+        instance?.consumerKey = Helper.getBundelValue("NAVER_CONSUMERKEY")
+        instance?.consumerSecret = Helper.getBundelValue("NAVER_CONSUMER_SECRET")
+        instance?.appName = Helper.getBundelValue("NAVER_APP_NAME")
+        
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
     }
     
     // 카카오톡으로부터 받은 URL인지 확인하고 웹뷰를 여는 형식

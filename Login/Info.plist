@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NAVER_SERVICE_URL_SCHEME</key>
+	<string>${NAVER_SERVICE_URL_SCHEME}</string>
+	<key>NAVER_CONSUMERKEY</key>
+	<string>${NAVER_CONSUMERKEY}</string>
+	<key>NAVER_CONSUMER_SECRET</key>
+	<string>${NAVER_CONSUMER_SECRET}</string>
+	<key>NAVER_APP_NAME</key>
+	<string>${NAVER_APP_NAME}</string>
 	<key>KAKAO_NATIVE_APP_KEY</key>
 	<string>${KAKAO_NATIVE_APP_KEY}</string>
 	<key>CFBundleURLTypes</key>

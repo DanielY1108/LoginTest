@@ -61,8 +61,22 @@ class LoginViewController: UIViewController {
         return button
     }
     
+    private lazy var naverButton = { (_ title: String, _ action: Selector, image: UIImage?) -> UIButton in
+        var config = UIButton.Configuration.filled()
+        config.title = title
+        config.image = image
+        config.baseBackgroundColor = UIColor(red: 3/255, green: 190/255, blue: 90/255, alpha: 1)
+        config.baseForegroundColor = .white
+        
+        let button = UIButton(configuration: config)
+        button.addTarget(self, action: action, for: .touchUpInside)
+        return button
+    }
+    
+    
     lazy var appleAuthVM: AppleAutoVM = { AppleAutoVM() }()
     lazy var kakaoAuthVM: KakaoAuthVM = { KakaoAuthVM() }()
+    lazy var naverAuthVM: NaverAuthVM = { NaverAuthVM() }()
     
     
     // MARK: - Life Cycle
@@ -93,6 +107,10 @@ class LoginViewController: UIViewController {
         let kakaoLogoutButton = kakaoButton("로그아웃 버튼", #selector(didTapKakaoLogout), nil)
         let kakaoUnlink = kakaoButton("언링크 버튼", #selector(didTapKakaoUnlink), nil)
         let kakaoUserInfo = kakaoButton("유저 정보 버튼", #selector(didTapKakaoUserInfo), nil)
+        let naverloginButton = naverButton("네이버 로그인", #selector(didTapNaverLogin), nil)
+        let naverlogoutButton = naverButton("네이버 로그아웃", #selector(didTapNaverLogout), nil)
+        let naverUserInfo = naverButton("유저 정보 버튼", #selector(didTapNaverUserInfo), nil)
+
         
         containerView.flex
             .justifyContent(.center)
@@ -117,6 +135,17 @@ class LoginViewController: UIViewController {
                 $0.addItem(kakaoUserInfo)
                     .width(view.frame.width-100)
                     .height(40)
+                $0.addItem(naverloginButton)
+                    .width(view.frame.width-100)
+                    .height(40)
+                    .margin(10)
+                $0.addItem(naverlogoutButton)
+                    .width(view.frame.width-100)
+                    .height(40)
+                $0.addItem(naverUserInfo)
+                    .width(view.frame.width-100)
+                    .height(40)
+                    .margin(10)
             }
     }
     
@@ -158,6 +187,24 @@ class LoginViewController: UIViewController {
         print("LoginVC - didTapKakaoUserInfo() called")
         
         kakaoAuthVM.getUserInfo()
+    }
+    
+    @objc func didTapNaverLogin() {
+        print("LoginVC - didTapNaverLogin() called")
+        
+        naverAuthVM.login()
+    }
+    
+    @objc func didTapNaverLogout() {
+        print("LoginVC - didTapNaverLogout() called")
+        
+        naverAuthVM.logout()
+    }
+    
+    @objc func didTapNaverUserInfo() {
+        print("LoginVC - didTapNaverUserInfo() called")
+        
+        naverAuthVM.getNaverInfo()
     }
 }
 

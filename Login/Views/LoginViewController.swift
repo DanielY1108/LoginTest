@@ -29,6 +29,13 @@ class LoginViewController: UIViewController {
         return label
     }()
     
+    private let naverLoingLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "네이버 로그인 여부"
+        return label
+    }()
+    
 //    private let kakaoLoginButton: UIButton = {
 //        var config = UIButton.Configuration.filled()
 //        config.title = "카카오 로그인"
@@ -107,6 +114,7 @@ class LoginViewController: UIViewController {
         let kakaoLogoutButton = kakaoButton("로그아웃 버튼", #selector(didTapKakaoLogout), nil)
         let kakaoUnlink = kakaoButton("언링크 버튼", #selector(didTapKakaoUnlink), nil)
         let kakaoUserInfo = kakaoButton("유저 정보 버튼", #selector(didTapKakaoUserInfo), nil)
+        
         let naverloginButton = naverButton("네이버 로그인", #selector(didTapNaverLogin), nil)
         let naverlogoutButton = naverButton("네이버 로그아웃", #selector(didTapNaverLogout), nil)
         let naverUserInfo = naverButton("유저 정보 버튼", #selector(didTapNaverUserInfo), nil)
@@ -121,6 +129,7 @@ class LoginViewController: UIViewController {
                     .height(40)
                     .margin(30)
                 $0.addItem(kakaoLoingLabel)
+                    .width(view.frame.width-100)
                 $0.addItem(kakaoLoginButton)
                     .width(view.frame.width-100)
                     .height(40)
@@ -135,6 +144,9 @@ class LoginViewController: UIViewController {
                 $0.addItem(kakaoUserInfo)
                     .width(view.frame.width-100)
                     .height(40)
+                $0.addItem(naverLoingLabel)
+                    .width(view.frame.width-100)
+                    .marginTop(30)
                 $0.addItem(naverloginButton)
                     .width(view.frame.width-100)
                     .height(40)
@@ -214,30 +226,43 @@ class LoginViewController: UIViewController {
 // MARK: - 뷰모델 바인딩
 extension LoginViewController {
     fileprivate func setBindings() {
-//        self.kakaoAuthVM.$isLoggedIn.sink { [weak self] isLoggdIn in
-//            guard let self = self else { return }
-//            
-//            self.kakaoLoingLabel.text = isLoggdIn ? "로그인 상태 " : "로그아웃 상태"
-//        }
-//        .store(in: &subscriptions)
+        
+        self.appleAuthVM.$longSucces
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] loginSucces in
+                if loginSucces {
+                    let mainVC = MainViewController()
+                    mainVC.modalPresentationStyle = .fullScreen
+                    self?.present(mainVC, animated: true)
+                }
+            }.store(in: &cancellables)
+        
+        //        self.kakaoAuthVM.$isLoggedIn.sink { [weak self] isLoggdIn in
+        //            guard let self = self else { return }
+        //
+        //            self.kakaoLoingLabel.text = isLoggdIn ? "카카오 로그인 성공 " : "카카오 로그아웃"
+        //        }
+        //        .store(in: &subscriptions)
         
         self.kakaoAuthVM.loginStatusInfo
             .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: kakaoLoingLabel)
             .store(in: &cancellables)
         
-        self.appleAuthVM.$longSucces
+        //        self.naverAuthVM.$isLoggedIn
+        //            .receive(on: DispatchQueue.main)
+        //            .sink { [weak self] isLoggedIn in
+        //            guard let self = self else { return }
+        //            self.naverLoingLabel.text = isLoggedIn ? "네이버 로그인 성공" : "네이버 로그아웃"
+        //        }
+        //        .store(in: &cancellables)
+        //    }
+        
+        self.naverAuthVM.loginStatuInfo
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] loginSucces in
-            if loginSucces {
-                let mainVC = MainViewController()
-                mainVC.modalPresentationStyle = .fullScreen
-                self?.present(mainVC, animated: true)
-            }
-        }.store(in: &cancellables)
+            .assign(to: \.text, on: naverLoingLabel)
+            .store(in: &cancellables)
     }
-    
-    
 }
 
 // MARK: - 애플 로그인

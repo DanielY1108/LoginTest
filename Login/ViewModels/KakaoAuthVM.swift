@@ -20,7 +20,7 @@ class KakaoAuthVM: ObservableObject {
     // 콤바인: 값의 변경이 일어나면 자동으로 업데이트 (원리는 wilset과 원리, rx의 옵저버블과 비슷)
     @Published var isLoggedIn: Bool = false
     
-    lazy var loginStatusInfo: AnyPublisher<String?, Never> = $isLoggedIn.compactMap { $0 ? "로그인 성공" : "로그아웃" }.eraseToAnyPublisher()
+    lazy var loginStatusInfo: AnyPublisher<String?, Never> = $isLoggedIn.compactMap { $0 ? "카카오 로그인 성공" : "카카오 로그아웃" }.eraseToAnyPublisher()
     
     @MainActor // // 카카오 로그인은 UI를 건들이기 때문에, 메인쓰레이드에서 작동되게 어노테이션을 설정해 줌
     func kakaoLonginWithApp() async -> Bool {

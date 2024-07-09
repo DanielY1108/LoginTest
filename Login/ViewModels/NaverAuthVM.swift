@@ -8,28 +8,43 @@
 import UIKit
 import NaverThirdPartyLogin
 import Alamofire
-
+import Combine
 
 class NaverAuthVM: NSObject {
+    
+    let cancelable = Set<AnyCancellable>()
+
+    @Published var isLoggedIn: Bool = false
+    
+    lazy var loginStatuInfo: AnyPublisher<String?, Never> = $isLoggedIn.compactMap { $0 ? "네이버 로그인 성공" : "네이버 로그아웃" }.eraseToAnyPublisher()
+    
+    let instance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     override init() {
         super.init()
         instance?.delegate = self
     }
-    
-    let instance = NaverThirdPartyLoginConnection.getSharedInstance()
-    
+        
     func login() {
         instance?.requestThirdPartyLogin()
     }
     
     func logout() {
-        instance?.requestDeleteToken()
+        print("저장된 토큰 제거 완료!")
+        // 저장된 토큰 정보만 삭제
+        instance?.resetToken()
+        isLoggedIn = false
+        
+        // 연동 해제
+//        instance?.requestDeleteToken()
     }
     
     func getNaverInfo() {
         guard let isVaildAccessToken = instance?.isValidAccessTokenExpireTimeNow() else { return }
-        guard isVaildAccessToken else { return }
+        guard isVaildAccessToken else {
+            print("저장된 토큰이 없습니다. 로그인 필요!")
+            return
+        }
         
         guard let tokenType = instance?.tokenType,
               let accessToken = instance?.accessToken else { return }
@@ -80,17 +95,18 @@ class NaverAuthVM: NSObject {
                 print(error)
             }
         }
-            
     }
 }
 
 extension NaverAuthVM: NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
         print("네이버 로그인 성공")
+        isLoggedIn = true
     }
     
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
         print("네이버 토큰 갱신 성공")
+        isLoggedIn = true
     }
     
     func oauth20ConnectionDidFinishDeleteToken() {
@@ -100,6 +116,4 @@ extension NaverAuthVM: NaverThirdPartyLoginConnectionDelegate {
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: (any Error)!) {
         print("에러 : \(error.localizedDescription)")
     }
-    
-    
 }

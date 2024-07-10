@@ -36,15 +36,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.setOnlyPortraitSupportInIphone(true)
         
         // 로그인 설정
-        instance?.serviceUrlScheme = Helper.getBundelValue("NAVER_SERVICE_URL_SCHEME")
-        instance?.consumerKey = Helper.getBundelValue("NAVER_CONSUMERKEY")
-        instance?.consumerSecret = Helper.getBundelValue("NAVER_CONSUMER_SECRET")
-        instance?.appName = Helper.getBundelValue("NAVER_APP_NAME")
+        instance?.serviceUrlScheme = Helper.getBundelValue("NAVER_SERVICE_URL_SCHEME")  // 콜백을 받을 URL Scheme
+        instance?.consumerKey = Helper.getBundelValue("NAVER_CONSUMERKEY")  // 애플리케이션에서 사용하는 클라이언트 아이디
+        instance?.consumerSecret = Helper.getBundelValue("NAVER_CONSUMER_SECRET")  // 애플리케이션에서 사용하는 클라이언트 시크릿
+        instance?.appName = Helper.getBundelValue("NAVER_APP_NAME")  // 애플리케이션 이름
         
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
+        NaverThirdPartyLoginConnection
+            .getSharedInstance()
+            .application(app, open: url, options: options)
     }
     
     // 카카오톡으로부터 받은 URL인지 확인하고 웹뷰를 여는 형식

@@ -32,11 +32,11 @@ class NaverAuthVM: NSObject {
     func logout() {
         print("저장된 토큰 제거 완료!")
         // 저장된 토큰 정보만 삭제
-        instance?.resetToken()
+//        instance?.resetToken()
         isLoggedIn = false
         
         // 연동 해제
-//        instance?.requestDeleteToken()
+        instance?.requestDeleteToken()
     }
     
     func getNaverInfo() {
